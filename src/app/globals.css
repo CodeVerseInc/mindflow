@@ -15,6 +15,27 @@
     'sidebar';
 }
 
+.message-container {
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
+  max-width: 95%;
+}
+
+.message-avatar {
+  border-radius: 999px;
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;
+}
+
+.message-text {
+  @apply bg-light;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-wrap: pretty;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     gap: 20px;
@@ -23,5 +44,11 @@
     grid-template-areas:
       'chat chat sidebar'
       'chat chat sidebar';
+  }
+}
+
+@media (min-width: 1024px) {
+  .message-container {
+    max-width: 70%;
   }
 }
