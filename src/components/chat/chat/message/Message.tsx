@@ -13,7 +13,7 @@ export const Message: React.FC<Props> = ({ children, role }) => {
     <div
       className={`
         message-container
-        ${role === 'ai' ? 'justify-end ml-auto' : 'justify-start mr-auto'}
+        ${role === 'ai' ? 'justify-start mr-auto' : 'justify-end ml-auto'}
       `}
     >
       <Image
@@ -22,7 +22,7 @@ export const Message: React.FC<Props> = ({ children, role }) => {
         height={50}
         alt='Thanatos Avatar'
         className={` message-avatar ${
-          role === 'ai' ? 'order-1' : 'order-none'
+          role === 'ai' ? 'order-none' : 'order-1'
         }`}
       />
 
