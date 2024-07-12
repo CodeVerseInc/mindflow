@@ -9,7 +9,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  gap: 10px;
+  gap: 20px;
   grid-template-areas:
     'chat'
     'sidebar';
@@ -17,7 +17,7 @@
 
 @media (min-width: 768px) {
   .wrapper {
-    gap: 8px;
+    gap: 20px;
     grid-template-columns: repeat(3);
     grid-template-rows: repeat(2, 1fr);
     grid-template-areas:
