@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { primary } from '@/config/font'
+import { primary, secundary } from '@/config/font'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${primary.variable} bg-primary text-white `}>
+      <body
+        className={`${
+          (primary.variable, secundary.variable)
+        } bg-primary text-white `}>
         {children}
       </body>
     </html>
