@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { primary } from '@/config/font'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   icons: {
@@ -17,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${inter.className} bg-primary text-white `}>
+      <body className={`${primary.variable} bg-primary text-white `}>
         {children}
       </body>
     </html>
