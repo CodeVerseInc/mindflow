@@ -3,7 +3,7 @@ import Image from 'next/image';
 export const Chat = () => {
   return (
     <section className='[grid-area:chat] flex flex-col gap-5 min-h-[calc(100vh-40px)]'>
-      <main className='bg-secundary rounded-2xl p-5 h-full'>
+      <main className='bg-secundary rounded-2xl p-5 h-full overflow-y-scroll'>
         <div className='message-container justify-end'>
           <Image
             src='/img/thanatos.png'
