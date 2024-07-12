@@ -1,9 +1,11 @@
-import { Sidebar } from '@/components/ui'
+import { Sidebar, Chat } from '@/components'
+import './globals.css'
 
 export default function HomePage() {
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <h1>Hola mundo</h1>
+    <main className={`wrapper md:h-screen w-full`}>
+      <Sidebar />
+      <Chat />
     </main>
   )
 }
