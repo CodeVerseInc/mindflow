@@ -2,7 +2,7 @@ import { Sidebar, Chat } from '@/components'
 import './globals.css'
 
 export const metadata = {
-  title: 'MindFlow & IA Chatbot',
+  title: 'MindFlow & IA Send',
   description:
     'Aplicacion integrada con inteligencia articifial dedicada a mejorar la salud mental de la personas mediante la meditacion y concentracion plena ademas del valor agregar de inteligencia artificial'
 }
