@@ -11,9 +11,10 @@ export const Message: React.FC<Props> = ({ children, role }) => {
 
   return (
     <div
-      className={`message-container ${
-        role === 'ai' ? 'justify-end ml-auto' : 'justify-start mr-auto'
-      }`}
+      className={`
+        message-container
+        ${role === 'ai' ? 'justify-end ml-auto' : 'justify-start mr-auto'}
+      `}
     >
       <Image
         src={img}
