@@ -1,22 +1,14 @@
-import Image from 'next/image';
+import { Message } from './message/Message';
 
 export const Chat = () => {
   return (
     <section className='[grid-area:chat] flex flex-col gap-5 min-h-[calc(100vh-40px)]'>
       <main className='bg-secundary rounded-2xl p-5 h-full overflow-y-scroll no-scrollbar'>
-        <div className='message-container justify-end'>
-          <Image
-            src='/img/thanatos.png'
-            width={50}
-            height={50}
-            alt='Thanatos Avatar'
-            className='message-avatar order-1'
-          />
+        <Message role='ai'>
+          Hola, soy tu asistente de meditación. Mi nombre es Thanatos.
+        </Message>
 
-          <p className='message-text'>
-            Hola, soy tu asistente de meditación. Mi nombre es Thanatos.
-          </p>
-        </div>
+        <Message role='user'>Hola</Message>
       </main>
 
       <input
