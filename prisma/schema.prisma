@@ -14,16 +14,16 @@ datasource db {
 }
 
 model songs {
-  id          String    @id @default(uuid())
-  name_song   String
+  id           String   @id @default(uuid())
+  url_song     String
   created_data DateTime @default(now())
   updated_data DateTime @updatedAt
 }
 
 model books {
-  id          String    @id @default(uuid())
-  name        String
-  link        String
+  id           String   @id @default(uuid())
+  name         String
+  url_book     String
   created_data DateTime @default(now())
   updated_data DateTime @updatedAt
 }

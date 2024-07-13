@@ -2,7 +2,8 @@
  
 #backend 
 /postgres 
-.env
+.env 
+.vscode
 
 # dependencies
 /node_modules
