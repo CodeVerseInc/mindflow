@@ -46,17 +46,37 @@ git clone https://github.com/CodeVerseInc/codicon-mindFlow.git
 
 1. Instala las dependencias:
 
-[!NOTE]
-Nosotros usamos [pnpm](https://pnpm.io) para manejar las dependencias.
+> [!NOTE]
+> Nosotros usamos [pnpm](https://pnpm.io) para manejar las dependencias.
 
 ```bash
 pnpm install
 ```
 
-2. Inicia el servidor de desarrollo:
+2. Levantar la base de datos:
+
+> [!IMPORTANT]
+> Debes tener instalado Docker.
+
+```bash
+# Ejecuta el siguiente comando
+docker compose up -d
+```
+
+3. Inicia el servidor de desarrollo:
 
 ```bash
 pnpm run dev
 ```
 
-3. Abre el proyecto [**http://localhost:3000**](http://localhost:3000/) con tu navegador.
+4. Abre el proyecto [**http://localhost:3000**](http://localhost:3000/) con tu navegador.
+
+## Comandos de prisma
+
+```bash
+# Inicializar prisma
+npx prisma init
+
+# Crear una nueva migracion
+npx prisma migrate dev
+```

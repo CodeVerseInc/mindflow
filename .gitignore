@@ -9,6 +9,8 @@
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+.env
+postgres
 
 # testing
 /coverage

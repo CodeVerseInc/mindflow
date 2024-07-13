@@ -1,19 +1,21 @@
 import Image from 'next/image';
 
 interface Props {
-  role: 'user' | 'ai';
+  role: 'user' | 'assistant';
   children: React.ReactNode;
 }
 
 export const Message: React.FC<Props> = ({ children, role }) => {
   //TODO: Add user image
-  const img = role === 'ai' ? '/img/thanatos.png' : '';
+  const img = role === 'assistant' ? '/img/thanatos.png' : '';
 
   return (
     <div
       className={`
         message-container
-        ${role === 'ai' ? 'justify-start mr-auto' : 'justify-end ml-auto'}
+        ${
+          role === 'assistant' ? 'justify-start mr-auto' : 'justify-end ml-auto'
+        }
       `}
     >
       <Image
@@ -22,7 +24,7 @@ export const Message: React.FC<Props> = ({ children, role }) => {
         height={50}
         alt='Thanatos Avatar'
         className={` message-avatar ${
-          role === 'ai' ? 'order-none' : 'order-1'
+          role === 'assistant' ? 'order-none' : 'order-1'
         }`}
       />
 
