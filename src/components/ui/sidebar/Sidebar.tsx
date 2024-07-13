@@ -1,5 +1,4 @@
-//import { Player } from '@/components/ui';
-import Player from '../player/Player'
+import { Player } from '@/components/ui'
 
 export const Sidebar = () => {
   return (
@@ -7,5 +6,5 @@ export const Sidebar = () => {
       <Player />
       <hr className='w-full border border-light' />
     </aside>
-  );
-};
+  )
+}
