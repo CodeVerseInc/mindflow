@@ -17,8 +17,8 @@
 
 .message-container {
   display: flex;
-  gap: 20px;
-  max-width: 95%;
+  gap: 10px;
+  max-width: 80%;
   align-items: end;
 }
 
