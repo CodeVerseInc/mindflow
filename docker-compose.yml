@@ -1,0 +1,14 @@
+version: '1.0.0' 
+ 
+services: 
+  mindflowDB: 
+    image: postgres:15.3 
+    container_name: mindflow-db 
+    restart: always 
+    ports:
+      - "5432:5432" 
+    environment:
+      - POSTGRES_USER=mindflow_backend 
+      - POSTGRES_PASSWORD=mb;$@#dlz;0r 
+    volumes: 
+      - ./postgres:/var/lib/postgresql/data
