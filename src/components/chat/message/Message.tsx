@@ -6,8 +6,7 @@ interface Props {
 }
 
 export const Message: React.FC<Props> = ({ children, role }) => {
-  //TODO: Add user image
-  const img = role === 'assistant' ? '/img/thanatos.png' : ''
+  const img = role === 'assistant' ? '/img/thanatos.png' : '/img/avatar.png';
 
   return (
     <div
@@ -16,12 +15,13 @@ export const Message: React.FC<Props> = ({ children, role }) => {
         ${
           role === 'assistant' ? 'justify-start mr-auto' : 'justify-end ml-auto'
         }
-      `}>
+      `}
+    >
       <Image
         src={img}
         width={50}
         height={50}
-        alt='Thanatos Avatar'
+        alt='Avatar'
         className={` message-avatar ${
           role === 'assistant' ? 'order-none' : 'order-1'
         }`}
