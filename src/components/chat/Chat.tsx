@@ -1,47 +1,49 @@
-'use client';
+'use client'
 
-import { Message as MessageType, useChat } from 'ai/react';
-import { Message } from './message/Message';
-import { useEffect, useRef } from 'react';
+import { Message as MessageType, useChat } from 'ai/react'
+import { Message } from './message/Message'
+import { useEffect, useRef } from 'react'
 
 const initialMessages: MessageType[] = [
   {
     id: '12345678',
     content:
       '¡Hola! Soy un asistente de meditación. ¿Estás interesado en realizar una sesión de meditación guiada hoy?',
-    role: 'assistant',
-  },
-];
+    role: 'assistant'
+  }
+]
 
 export const Chat = () => {
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null)
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    initialMessages,
-  });
+    initialMessages
+  })
 
   useEffect(() => {
-    if (!messagesContainerRef.current) return;
+    if (!messagesContainerRef.current) return
 
-    const { scrollHeight } = messagesContainerRef.current;
+    const { scrollHeight } = messagesContainerRef.current
 
-    messagesContainerRef.current.scrollTop = scrollHeight;
-  }, [messages]);
+    messagesContainerRef.current.scrollTop = scrollHeight
+  }, [messages])
 
   return (
     <section className='[grid-area:chat] flex flex-col gap-5 min-h-[calc(100vh-40px)]'>
       <main
         className='bg-secundary rounded-2xl p-5 h-full overflow-y-scroll no-scrollbar flex flex-col gap-5 scroll-smooth'
-        ref={messagesContainerRef}
-      >
+        ref={messagesContainerRef}>
+        <h1 className='text-center text-green text-2xl font-semibold'>
+          Mind Flow
+        </h1>
+
         {messages.map((message) => {
           return (
             <Message
               key={message.id}
-              role={message.role as 'user' | 'assistant'}
-            >
+              role={message.role as 'user' | 'assistant'}>
               {message.content}
             </Message>
-          );
+          )
         })}
       </main>
 
@@ -55,5 +57,5 @@ export const Chat = () => {
         />
       </form>
     </section>
-  );
-};
+  )
+}
