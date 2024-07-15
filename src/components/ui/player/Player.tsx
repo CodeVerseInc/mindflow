@@ -81,7 +81,7 @@ export const Player = () => {
   const totalTime = audioPlayer.current?.duration ?? 0
 
   return (
-    <div className='flex flex-col items-center justify-center gap-y-5 m-14'>
+    <div className='[grid-area:player] bg-secundary flex flex-col items-center justify-center gap-y-5 rounded-2xl'>
       <div className='flex gap-x-5 items-center'>
         <span className=''>{formatTime(currentTime)}</span>
         <input
