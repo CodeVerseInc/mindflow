@@ -63,7 +63,14 @@ pnpm install
 docker compose up -d
 ```
 
-3. Inicia el servidor de desarrollo:
+3. Ejecuta la semilla para la base de datos
+   Has una peticion GET al siguiente endpoint:
+
+```bash
+localhost:3000/api/seed
+```
+
+4. Inicia el servidor de desarrollo:
 
 ```bash
 pnpm run dev
