@@ -86,4 +86,17 @@ npx prisma init
 
 # Crear una nueva migracion
 npx prisma migrate dev
+
+```
+
+> [!WARNING]
+> Esto borrara los datos de la base de datos.
+
+```bash
+# Agregar los cambios a la base de datos
+npx prisma db push
+
+# Traer cambios de la base de datos al schema
+npx prisma db push
+
 ```
