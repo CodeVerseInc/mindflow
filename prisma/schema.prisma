@@ -25,7 +25,7 @@ model songs {
 model books {
   id           String   @id @default(uuid())
   name_book    String
-  image_book   String
+  image        String
   url_book     String
   created_data DateTime @default(now())
   updated_data DateTime @updatedAt
