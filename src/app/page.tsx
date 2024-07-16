@@ -1,4 +1,4 @@
-import { Sidebar, Chat, Player } from '@/components'
+import { Sidebar, Chat } from '@/components'
 import './globals.css'
 
 export const metadata = {
@@ -10,7 +10,6 @@ export const metadata = {
 export default function HomePage() {
   return (
     <main className={`wrapper w-full p-5 h-screen`}>
-      <Player />
       <Sidebar />
       <Chat />
     </main>

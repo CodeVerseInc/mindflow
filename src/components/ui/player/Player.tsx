@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
+import Image from 'next/image'
 import {
   IconPlayerPlay,
   IconPlayerPause,
@@ -9,7 +10,17 @@ import {
 import { ButtonPlayer } from './button-player/ButtonPlayer'
 import styles from './audioplayer.module.css'
 
-export const Player = () => {
+interface Song {
+  url_song: string
+  name: string
+  image: string
+}
+
+interface PlayerProps {
+  song: Song
+}
+
+export const Player: React.FC<PlayerProps> = ({ song }) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
 
@@ -29,13 +40,14 @@ export const Player = () => {
   }, [])
 
   const togglePlay = () => {
-    if (audioPlayer.current) {
-      if (isPlaying) {
-        audioPlayer.current.pause()
-      } else {
-        audioPlayer.current.play()
-      }
-      setIsPlaying(!isPlaying)
+    const prevValue = isPlaying
+    setIsPlaying(!prevValue)
+    if (!prevValue) {
+      audioPlayer.current!.play()
+      animationRef.current = requestAnimationFrame(whilePlaying)
+    } else {
+      audioPlayer.current!.pause()
+      cancelAnimationFrame(animationRef.current!)
     }
   }
 
@@ -81,7 +93,14 @@ export const Player = () => {
   const totalTime = audioPlayer.current?.duration ?? 0
 
   return (
-    <div className='[grid-area:player] bg-secundary flex flex-col items-center justify-center gap-y-5 rounded-2xl'>
+    <div className='[grid-area:player] bg-secundary flex flex-col items-center justify-center gap-y-3 rounded-2xl'>
+      <Image
+        src={song.image}
+        alt='Portada'
+        width={100}
+        height={100}
+        className='w-24 h-24 object-cover rounded-md'
+      />
       <div className='flex gap-x-5 items-center'>
         <span className=''>{formatTime(currentTime)}</span>
         <input
@@ -109,8 +128,8 @@ export const Player = () => {
           <IconPlayerSkipForward stroke={2} />
         </ButtonPlayer>
       </div>
-      <audio ref={audioPlayer} src='/music/temporary_music.mp3' />
-      <p className='underline text-xl text-center'>La people</p>
+      <audio ref={audioPlayer} src={song.url_song} />
+      <p className='underline text-xl text-center'>{song.name}</p>
     </div>
   )
 }
