@@ -1,1 +1,1 @@
-export * from './chat/Chat'
+export * from './Chat'

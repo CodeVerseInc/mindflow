@@ -1,11 +1,14 @@
 interface Props {
   children: React.ReactNode
+  onClick: () => void
 }
 
-export const ButtonPlayer = ({ children }: Props) => {
+export const ButtonPlayer = ({ children, onClick }: Props) => {
   return (
-    <div className='flex items-center  justify-center bg-light rounded-full w-14 h-14'>
+    <button
+      className='flex items-center justify-center bg-light rounded-full w-10 h-10 hover:bg-yellow transition-colors duration-300'
+      onClick={onClick}>
       {children}
-    </div>
+    </button>
   )
 }
