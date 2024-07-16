@@ -1,5 +1,4 @@
 import { Sidebar, Chat } from '@/components'
-import './globals.css'
 
 export const metadata = {
   title: 'MindFlow & IA Send',
