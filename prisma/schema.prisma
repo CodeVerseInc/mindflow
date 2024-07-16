@@ -16,6 +16,8 @@ datasource db {
 model songs {
   id           String   @id @default(uuid())
   url_song     String
+  image_song   String
+  name_song    String
   created_data DateTime @default(now())
   updated_data DateTime @updatedAt
 }
@@ -23,6 +25,7 @@ model songs {
 model books {
   id           String   @id @default(uuid())
   name_book    String
+  image_book   String
   url_book     String
   created_data DateTime @default(now())
   updated_data DateTime @updatedAt
