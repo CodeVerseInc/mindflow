@@ -38,7 +38,7 @@ Mindflow es una aplicacion web la cual tiene como inspiracion el mejorar la salu
 
 ## 🚀 Como comenzar
 
-1. [Fork](https://github.com/CodeVerseInc/mindflow) o clona este repositorio.
+1. [Fork](https://github.com/CodeVerseInc/mindflow/) o clona este repositorio.
 
 ```bash
 git clone https://github.com/CodeVerseInc/codicon-mindFlow.git
