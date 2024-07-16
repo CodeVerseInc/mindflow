@@ -3,18 +3,20 @@
 import { Message as MessageType, useChat } from 'ai/react'
 import { Message } from './message/Message'
 import { useEffect, useRef } from 'react'
+import { IconSend2 } from '@tabler/icons-react'
 
 const initialMessages: MessageType[] = [
   {
     id: '12345678',
     content:
-      '¡Hola! Soy un asistente de meditación. ¿Estás interesado en realizar una sesión de meditación guiada hoy?',
+      '¡Hola! Soy Thanatos tu asistente de meditación. ¿Estás interesado en meditar hoy?',
     role: 'assistant'
   }
 ]
 
 export const Chat = () => {
   const messagesContainerRef = useRef<HTMLDivElement>(null)
+
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     initialMessages
   })
@@ -48,13 +50,20 @@ export const Chat = () => {
       </main>
 
       <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='Mensaje...'
-          className='w-full bg-light rounded-2xl h-16 px-5'
-          value={input}
-          onChange={handleInputChange}
-        />
+        <div className='flex gap-x-5'>
+          <input
+            type='text'
+            placeholder='Mensaje...'
+            className='w-full  bg-light rounded-2xl h-16 px-5'
+            value={input}
+            onChange={handleInputChange}
+          />
+          <button
+            className='bg-secundary bottom-5 w-20 rounded-2xl flex  justify-center items-center'
+            onClick={handleSubmit}>
+            <IconSend2 stroke={2} />
+          </button>
+        </div>
       </form>
     </section>
   )
