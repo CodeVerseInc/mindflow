@@ -63,20 +63,23 @@ pnpm install
 docker compose up -d
 ```
 
-3. Ejecuta la semilla para la base de datos
+3. Inicia el servidor de desarrollo.
+
+```bash
+pnpm run dev
+```
+
+4. Ejecuta la semilla para llenar la base de datos.
    Has una peticion GET al siguiente endpoint:
 
 ```bash
 localhost:3000/api/seed
 ```
 
-4. Inicia el servidor de desarrollo:
+> [!NOTE]
+> Esto llenara la base de datos con datos de prueba.
 
-```bash
-pnpm run dev
-```
-
-4. Abre el proyecto [**http://localhost:3000**](http://localhost:3000/) con tu navegador.
+1. Abre el proyecto [**http://localhost:3000**](http://localhost:3000/) en tu navegador.
 
 ## Comandos de prisma
 
@@ -86,7 +89,6 @@ npx prisma init
 
 # Crear una nueva migracion
 npx prisma migrate dev
-
 ```
 
 > [!WARNING]
