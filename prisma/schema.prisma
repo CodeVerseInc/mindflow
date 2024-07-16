@@ -27,6 +27,7 @@ model books {
   name_book    String
   image_book   String
   url_book     String
+  image        String
   created_data DateTime @default(now())
   updated_data DateTime @updatedAt
 }
