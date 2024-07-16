@@ -93,7 +93,7 @@ export const Player: React.FC<PlayerProps> = ({ song }) => {
   const totalTime = audioPlayer.current?.duration ?? 0
 
   return (
-    <div className='[grid-area:player] bg-secundary flex flex-col items-center justify-center gap-y-3 rounded-2xl'>
+    <div className='[grid-area:player] bg-secundary flex flex-col items-center justify-center gap-y-3 rounded-2xl p-5'>
       <Image
         src={song.image}
         alt='Portada'
