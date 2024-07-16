@@ -3,4 +3,5 @@ export interface Book {
   title: string
   href: string
   key?: string
+  image: string
 }
