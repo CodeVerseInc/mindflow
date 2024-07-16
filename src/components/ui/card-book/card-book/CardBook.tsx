@@ -7,7 +7,7 @@ export const CardBook = ({ title, href, image }: Book) => {
     <Link
       href={href}
       target='_blank'
-      className='w-80 h-22 bg-primary rounded-lg p-5 flex justify-between items-center curosr-pointer'>
+      className='md:w-80 h-22 bg-primary rounded-lg p-5 flex justify-between items-center curosr-pointer'>
       <h3 className='font-bold'>{title}</h3>
       {/* Todo: agregar portada a los libros */}
       <Image
