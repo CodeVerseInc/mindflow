@@ -101,3 +101,15 @@ npx prisma db push
 ```bash
 npx prisma db push
 ```
+
+## Team
+
+-[Angel Dev - Frontend](https://github.com/angelcruz07)
+
+-[Luis- Frontend](https://github.com/LugpDev2022)
+
+-[Lizandro - Backend](https://github.com/LizandroBackEnd)
+
+-[Arif - Designer](https://github.com/Ariff-dev)
+
+-[Porto - Frontend](https://github.com/Porto1090)
