@@ -9,52 +9,72 @@ export async function GET(request: Request) {
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841911/mindflow/songs/1_awh3d6.mp3',
-        name: 'September'
+        name: 'September',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720844945/mindflow/images/2_wy7ujg.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841885/mindflow/songs/2_wpgfrs.mp3',
-        name: 'You not the same'
+        name: 'You not the same',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720844952/mindflow/images/5_vapz7m.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841873/mindflow/songs/3_a4d1am.mp3',
-        name: 'Snowfall'
+        name: 'Snowfall',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720844953/mindflow/images/7_vnsozv.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841893/mindflow/songs/4_loliep.mp3',
-        name: 'First Snow'
+        name: 'First Snow',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720844955/mindflow/images/6_ucmrts.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841900/mindflow/songs/5_wsqdfg.mp3',
-        name: 'Sleepless'
+        name: 'Sleepless',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720844956/mindflow/images/1_yvn6mm.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841873/mindflow/songs/6_ummgri.mp3',
-        name: 'Numb'
+        name: 'Numb',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720844959/mindflow/images/4_cm1qq5.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841889/mindflow/songs/7_ww02tk.mp3',
-        name: 'Nothing feels the same'
+        name: 'Nothing feels the same',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720844960/mindflow/images/3_wyqxxw.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841903/mindflow/songs/8_pjx6jg.mp3',
-        name: 'Subwoofer Lullaby'
+        name: 'Subwoofer Lullaby',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720875742/mindflow/images/8_wrbqfy.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841880/mindflow/songs/9_urebxg.mp3',
-        name: 'This feeling'
+        name: 'This feeling',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720875743/mindflow/images/9_nnprxn.png'
       },
       {
         url_song:
           'https://res.cloudinary.com/dlklqucye/video/upload/v1720841870/mindflow/songs/10_rlsodh.mp3',
-        name: 'Nightlights'
+        name: 'Nightlights',
+        image:
+          'https://res.cloudinary.com/dlklqucye/image/upload/v1720875744/mindflow/images/10_v2ptge.png'
       }
     ]
   })
