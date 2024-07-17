@@ -1,5 +1,3 @@
-version: '1.0.0'
-
 services:
   todosDB:
     image: postgres:15.3
