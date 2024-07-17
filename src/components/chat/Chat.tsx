@@ -30,7 +30,7 @@ export const Chat = () => {
   }, [messages])
 
   return (
-    <section className='[grid-area:chat] flex flex-col gap-5 min-h-[calc(100vh-40px)]'>
+    <section className='[grid-area:chat] flex flex-col gap-5 min-h-[calc(100vh-40px)] md:min-h-0'>
       <main
         className='bg-secundary rounded-2xl p-5 h-full overflow-y-scroll no-scrollbar flex flex-col gap-5 scroll-smooth'
         ref={messagesContainerRef}>
