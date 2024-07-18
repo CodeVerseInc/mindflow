@@ -11,18 +11,19 @@ import { ButtonPlayer } from './button-player/ButtonPlayer'
 import styles from './audioplayer.module.css'
 
 interface Song {
-  url_song: string;
-  name: string;
-  image: string;
+  url_song: string
+  name: string
+  image: string
 }
 
 interface PlayerProps {
-  songs: Song[];
-  initialSongIndex: number;
+  songs: Song[]
+  initialSongIndex: number
 }
 
 export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
-  const [currentSongIndex, setCurrentSongIndex] = useState<number>(initialSongIndex);
+  const [currentSongIndex, setCurrentSongIndex] =
+    useState<number>(initialSongIndex)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
   const [totalTime, setTotalTime] = useState(0)
@@ -32,38 +33,42 @@ export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
   const animationRef = useRef<number>()
 
   useEffect(() => {
-    const audio = audioPlayer.current;
+    const audio = audioPlayer.current
 
     const updateTime = () => {
-      setCurrentTime(audio.currentTime);
-    };
+      if (audio) {
+        setCurrentTime(audio.currentTime)
+      }
+    }
 
     const setDuration = () => {
-      setTotalTime(audio.duration);
-    };
+      if (audio) {
+        setTotalTime(audio.duration)
+      }
+    }
 
     const endedSong = () => {
-      setCurrentSongIndex(prevIndex => (prevIndex + 1) % songs.length);
-      setIsPlaying(false);
-    };
+      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length)
+      setIsPlaying(false)
+    }
 
     if (audio) {
-      audio.addEventListener('timeupdate', updateTime);
-      audio.addEventListener('loadedmetadata', setDuration);
-      audio.addEventListener('ended', endedSong);
+      audio.addEventListener('timeupdate', updateTime)
+      audio.addEventListener('loadedmetadata', setDuration)
+      audio.addEventListener('ended', endedSong)
 
       return () => {
-        audio.removeEventListener('timeupdate', updateTime);
-        audio.removeEventListener('loadedmetadata', setDuration);
-        audio.removeEventListener('ended', endedSong);
-      };
+        audio.removeEventListener('timeupdate', updateTime)
+        audio.removeEventListener('loadedmetadata', setDuration)
+        audio.removeEventListener('ended', endedSong)
+      }
     }
-  }, [currentSongIndex, songs]);
+  }, [currentSongIndex, songs])
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying)
     const audio = audioPlayer.current
-    setTotalTime(audio.duration)
+    if (audio) setTotalTime(audio.duration)
 
     if (!isPlaying && audio) {
       audio.play()
@@ -92,16 +97,17 @@ export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
   }
 
   const skipBackward = () => {
-    const newIndex = currentSongIndex > 0 ? currentSongIndex - 1 : songs.length - 1;
-    setCurrentSongIndex(newIndex);
-    setIsPlaying(false);
-  };
+    const newIndex =
+      currentSongIndex > 0 ? currentSongIndex - 1 : songs.length - 1
+    setCurrentSongIndex(newIndex)
+    setIsPlaying(false)
+  }
 
   const skipForward = () => {
-    const newIndex = (currentSongIndex + 1) % songs.length;
-    setCurrentSongIndex(newIndex);
-    setIsPlaying(false);
-  };
+    const newIndex = (currentSongIndex + 1) % songs.length
+    setCurrentSongIndex(newIndex)
+    setIsPlaying(false)
+  }
 
   const formatTime = (time: number) => {
     if (time == null) return `0:00`
@@ -109,7 +115,7 @@ export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
     const minutes = Math.floor(time / 60)
 
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
-  };
+  }
 
   const currentSong = songs[currentSongIndex]
 
@@ -140,7 +146,11 @@ export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
           <IconPlayerSkipBack stroke={2} />
         </ButtonPlayer>
         <ButtonPlayer onClick={togglePlay}>
-          {isPlaying ? <IconPlayerPause stroke={2} /> : <IconPlayerPlay stroke={2} />}
+          {isPlaying ? (
+            <IconPlayerPause stroke={2} />
+          ) : (
+            <IconPlayerPlay stroke={2} />
+          )}
         </ButtonPlayer>
         <ButtonPlayer onClick={skipForward}>
           <IconPlayerSkipForward stroke={2} />
@@ -149,5 +159,5 @@ export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
       <audio ref={audioPlayer} src={currentSong.url_song} />
       <p className='underline text-xl text-center'>{currentSong.name}</p>
     </div>
-  );
-};
+  )
+}
