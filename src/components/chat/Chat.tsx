@@ -4,6 +4,7 @@ import { Message as MessageType, useChat } from 'ai/react'
 import { Message } from './message/Message'
 import { useEffect, useRef } from 'react'
 import { IconSend2 } from '@tabler/icons-react'
+import { readText } from '@/lib/readText'
 
 const initialMessages: MessageType[] = [
   {
@@ -18,7 +19,10 @@ export const Chat = () => {
   const messagesContainerRef = useRef<HTMLDivElement>(null)
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    initialMessages
+    initialMessages,
+    onFinish: (message) => {
+      readText(message.content)
+    }
   })
 
   useEffect(() => {
@@ -30,7 +34,7 @@ export const Chat = () => {
   }, [messages])
 
   return (
-    <section className='[grid-area:chat] flex flex-col gap-5 min-h-[calc(100vh-40px)]'>
+    <section className='[grid-area:chat] flex flex-col gap-5 min-h-[calc(100vh-40px)] md:min-h-0'>
       <main
         className='bg-secundary rounded-2xl p-5 h-full overflow-y-scroll no-scrollbar flex flex-col gap-5 scroll-smooth'
         ref={messagesContainerRef}>

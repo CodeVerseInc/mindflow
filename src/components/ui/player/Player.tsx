@@ -17,12 +17,16 @@ interface Song {
 }
 
 interface PlayerProps {
-  song: Song
+  songs: Song[]
+  initialSongIndex: number
 }
 
-export const Player: React.FC<PlayerProps> = ({ song }) => {
+export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
+  const [currentSongIndex, setCurrentSongIndex] =
+    useState<number>(initialSongIndex)
   const [isPlaying, setIsPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
+  const [totalTime, setTotalTime] = useState(0)
 
   const audioPlayer = useRef<HTMLAudioElement>(null)
   const progressBar = useRef<HTMLInputElement>(null)
@@ -30,56 +34,79 @@ export const Player: React.FC<PlayerProps> = ({ song }) => {
 
   useEffect(() => {
     const audio = audioPlayer.current
-    if (audio) {
-      const updateTime = () => setCurrentTime(audio.currentTime)
-      audio.addEventListener('timeupdate', updateTime)
-      return () => {
-        audio.removeEventListener('timeupdate', updateTime)
+
+    const updateTime = () => {
+      if (audio) {
+        setCurrentTime(audio.currentTime)
       }
     }
-  }, [])
+
+    const setDuration = () => {
+      if (audio) {
+        setTotalTime(audio.duration)
+      }
+    }
+
+    const endedSong = () => {
+      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length)
+      setIsPlaying(false)
+    }
+
+    if (audio) {
+      audio.addEventListener('timeupdate', updateTime)
+      audio.addEventListener('loadedmetadata', setDuration)
+      audio.addEventListener('ended', endedSong)
+
+      return () => {
+        audio.removeEventListener('timeupdate', updateTime)
+        audio.removeEventListener('loadedmetadata', setDuration)
+        audio.removeEventListener('ended', endedSong)
+      }
+    }
+  }, [currentSongIndex, songs])
 
   const togglePlay = () => {
-    const prevValue = isPlaying
-    setIsPlaying(!prevValue)
-    if (!prevValue) {
-      audioPlayer.current!.play()
+    setIsPlaying(!isPlaying)
+    const audio = audioPlayer.current
+    if (audio) setTotalTime(audio.duration)
+
+    if (!isPlaying && audio) {
+      audio.play()
       animationRef.current = requestAnimationFrame(whilePlaying)
     } else {
-      audioPlayer.current!.pause()
+      audio?.pause()
       cancelAnimationFrame(animationRef.current!)
     }
   }
 
   const whilePlaying = () => {
-    if (audioPlayer.current && progressBar.current) {
-      progressBar.current.value = audioPlayer.current.currentTime.toString()
+    const audio = audioPlayer.current
+
+    if (audio && progressBar.current) {
+      progressBar.current.value = audio.currentTime.toString()
       animationRef.current = requestAnimationFrame(whilePlaying)
     }
   }
 
   const changeRange = () => {
-    if (audioPlayer.current && progressBar.current) {
-      audioPlayer.current.currentTime = parseFloat(progressBar.current.value)
+    const audio = audioPlayer.current
+
+    if (audio && progressBar.current) {
+      audio.currentTime = parseFloat(progressBar.current.value)
     }
   }
 
   const skipBackward = () => {
-    if (progressBar.current) {
-      progressBar.current.value = (
-        progressBar.current.valueAsNumber - 10
-      ).toString()
-      changeRange()
-    }
+    const newIndex =
+      currentSongIndex > 0 ? currentSongIndex - 1 : songs.length - 1
+    setCurrentSongIndex(newIndex)
+    setIsPlaying(false)
   }
 
   const skipForward = () => {
-    if (progressBar.current) {
-      progressBar.current.value = (
-        progressBar.current.valueAsNumber + 10
-      ).toString()
-      changeRange()
-    }
+    const newIndex = (currentSongIndex + 1) % songs.length
+    setCurrentSongIndex(newIndex)
+    setIsPlaying(false)
   }
 
   const formatTime = (time: number) => {
@@ -90,25 +117,26 @@ export const Player: React.FC<PlayerProps> = ({ song }) => {
     return `${minutes}:${seconds.toString().padStart(2, '0')}`
   }
 
-  const totalTime = audioPlayer.current?.duration ?? 0
+  const currentSong = songs[currentSongIndex]
 
   return (
     <div className='[grid-area:player] bg-secundary flex flex-col items-center justify-center gap-y-3 rounded-2xl p-5'>
       <Image
-        src={song.image}
+        src={currentSong.image}
         alt='Portada'
         width={100}
         height={100}
         className='w-24 h-24 object-cover rounded-md'
       />
       <div className='flex gap-x-5 items-center'>
-        <span className=''>{formatTime(currentTime)}</span>
+        <span>{formatTime(currentTime)}</span>
         <input
           type='range'
           ref={progressBar}
           defaultValue='0'
           onChange={changeRange}
           className={styles.progressBar}
+          max={totalTime}
         />
         <span>{formatTime(totalTime)}</span>
       </div>
@@ -128,8 +156,8 @@ export const Player: React.FC<PlayerProps> = ({ song }) => {
           <IconPlayerSkipForward stroke={2} />
         </ButtonPlayer>
       </div>
-      <audio ref={audioPlayer} src={song.url_song} />
-      <p className='underline text-xl text-center'>{song.name}</p>
+      <audio ref={audioPlayer} src={currentSong.url_song} />
+      <p className='underline text-xl text-center'>{currentSong.name}</p>
     </div>
   )
 }
