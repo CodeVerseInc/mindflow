@@ -36,7 +36,7 @@ Mindflow es una aplicacion web la cual tiene como inspiracion el mejorar la salu
 
 [**Mind Flow**](https://mindflow.vercel.app/)
 
-# 🚀 Como comenzar
+# 🚀 Como comenzar a desarrollar 
 
 ### 1. [Fork](https://github.com/CodeVerseInc/mindflow) o clona este repositorio.
 
@@ -52,6 +52,11 @@ git clone https://github.com/CodeVerseInc/codicon-mindFlow.git
 ```bash
 pnpm install
 ```
+
+>[!NOTE]
+> Para que el proyecto en local te funcione deberas de tener las variables de 
+> entorno, las puedes encontrar en el archivo `.env.template`
+
 
 ### 3. Levantar la base de datos:
 
