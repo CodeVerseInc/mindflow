@@ -1,9 +1,9 @@
-import { Player, GridBooks } from '@/components/ui';
-import { getSongs } from '@/lib/utils';
+import { Player, GridBooks } from '@/components/ui'
+import { getSongs } from '@/lib/utils'
 
 export const Sidebar = async () => {
-  const songs = await getSongs();
-  const randomIndex = Math.floor(Math.random() * songs.length);
+  const songs = await getSongs()
+  const randomIndex = Math.floor(Math.random() * songs.length)
 
   return (
     <>
@@ -17,5 +17,5 @@ export const Sidebar = async () => {
         </div>
       </aside>
     </>
-  );
-};
+  )
+}
