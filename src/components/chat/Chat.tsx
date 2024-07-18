@@ -4,6 +4,7 @@ import { Message as MessageType, useChat } from 'ai/react'
 import { Message } from './message/Message'
 import { useEffect, useRef } from 'react'
 import { IconSend2 } from '@tabler/icons-react'
+import { readText } from '@/lib/readText'
 
 const initialMessages: MessageType[] = [
   {
@@ -18,7 +19,10 @@ export const Chat = () => {
   const messagesContainerRef = useRef<HTMLDivElement>(null)
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
-    initialMessages
+    initialMessages,
+    onFinish: (message) => {
+      readText(message.content)
+    }
   })
 
   useEffect(() => {
