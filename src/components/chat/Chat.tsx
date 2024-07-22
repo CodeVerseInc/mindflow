@@ -5,6 +5,7 @@ import { Message } from './message/Message'
 import { useEffect, useRef } from 'react'
 import { IconSend2 } from '@tabler/icons-react'
 import { readText } from '@/lib/readText'
+import { useVoices } from './useVoices'
 
 const initialMessages: MessageType[] = [
   {
@@ -17,11 +18,13 @@ const initialMessages: MessageType[] = [
 
 export const Chat = () => {
   const messagesContainerRef = useRef<HTMLDivElement>(null)
+  const voices = useVoices()
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     initialMessages,
     onFinish: (message) => {
-      readText(message.content)
+      //Fix: Not working on mobile
+      readText(message.content, voices)
     }
   })
 
