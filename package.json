@@ -13,11 +13,16 @@
   "dependencies": {
     "@ai-sdk/openai": "^0.0.36",
     "@prisma/client": "5.16.2",
+    "@ricky0123/vad-react": "^0.0.24",
     "@tabler/icons-react": "^3.10.0",
     "ai": "^3.2.22",
+    "clsx": "^2.1.1",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sonner": "^1.5.0",
+    "zod": "^3.23.8",
+    "zod-form-data": "^2.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
