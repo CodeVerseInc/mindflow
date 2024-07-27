@@ -4,7 +4,6 @@ import { headers } from 'next/headers';
 import { z } from 'zod';
 import { zfd } from 'zod-form-data';
 
-//import { unstable_after as after } from 'next/server';
 
 const groq = createOpenAI({
   baseURL: 'https://api.groq.com/openai/v1',
@@ -27,6 +26,7 @@ const schema = zfd.formData({
 })
 
 export async function POST(request: Request) {
+  console.time("transcribe " + request.headers.get("x-vercel-id") || "local")
 
   const { data, success } = schema.safeParse(await request.formData())
   if (!success) return new Response("Invalid request"), { status: 400 }
@@ -52,6 +52,8 @@ export async function POST(request: Request) {
     prompt
   })
 
+  console.log(completion.text)
+
   const voice = await fetch('https://api.cartesia.ai/tss/bytes', {
     method: 'POST',
     headers: {
@@ -60,7 +62,7 @@ export async function POST(request: Request) {
       'X-API-Key': process.env.CARTESIA_API_KEY!,
     },
     body: JSON.stringify({
-      model_id: 'sonic-english',
+      model_id: 'sonic-multilingual',
       trasncript: completion.text,
       voice: {
         mode: 'id',
@@ -75,12 +77,14 @@ export async function POST(request: Request) {
   })
 
   if (voice.ok) {
-    console.error(await voice.text())
+    const errorMessage = await voice.text();
+    console.error("Voice synthesis failed:", errorMessage);
     return new Response('Voice synthesis failed', { status: 500 })
   }
 
   return new Response(voice.body, {
     headers: {
+      "Content-Type": "audio/wav",
       "X-Transcript": encodeURIComponent(input),
       "X-Response": encodeURIComponent(completion.text)
     }
