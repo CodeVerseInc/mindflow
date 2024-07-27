@@ -52,7 +52,6 @@ export async function POST(request: Request) {
     prompt
   })
 
-  console.log(completion.text)
 
   const voice = await fetch('https://api.cartesia.ai/tss/bytes', {
     method: 'POST',
@@ -76,10 +75,15 @@ export async function POST(request: Request) {
     }),
   })
 
+
   if (voice.ok) {
     const errorMessage = await voice.text();
     console.error("Voice synthesis failed:", errorMessage);
+
+
+    console.log(voice.body)
     return new Response('Voice synthesis failed', { status: 500 })
+
   }
 
   return new Response(voice.body, {

@@ -11,6 +11,9 @@ export function usePlayer() {
 
     let nextStartTime = audioContext.current.currentTime;
     const reader = stream.getReader();
+
+    console.log(reader)
+
     let leftover = new Uint8Array();
     let result = await reader.read();
     setIsPlaying(true);

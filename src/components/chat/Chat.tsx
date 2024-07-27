@@ -74,10 +74,11 @@ export const Chat = () => {
     }
 
     const latency = Date.now() - submittedAt;
+    console.log(response.body)
 
     player.play(response.body, () => {
-      const isFirefox = navigator.userAgent.includes("Firefox");
     })
+
     setInput(transcript);
 
 
