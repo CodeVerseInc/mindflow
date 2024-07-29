@@ -7,16 +7,14 @@ export const GridBooks = async () => {
   return (
     <div className='scroll-smooth overflow-y-auto h-[600px]'>
       <div className='flex flex-col gap-y-5'>
-        {books.map((book) => {
-          return (
-            <CardBook
-              key={book.id}
-              title={book.name_book}
-              href={book.url_book}
-              image={book.image}
-            />
-          )
-        })}
+        {books.map((book) => (
+          <CardBook
+            key={book.id}
+            title={book.name_book}
+            href={book.url_book}
+            image={book.image}
+          />
+        ))}
       </div>
     </div>
   )
