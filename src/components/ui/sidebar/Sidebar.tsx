@@ -10,13 +10,11 @@ export const Sidebar = async () => {
   return (
     <>
       <Player songs={songs} initialSongIndex={randomIndex} />
-      <aside className='[grid-area:sidebar] bg-secundary rounded-2xl relative'>
-        <div className='flex flex-col gap-y-5 h-[600px] overflow-y-scroll px-10 py-5 '>
-          {/* <header className='absolute top-0 left-0 bg-secundary w-full py-5'>
-          <h2 className='text-center text-2xl font-semibold text-green'>
-            Libros recomendados
-          </h2>
-        </header> */}
+      <aside className='[grid-area:sidebar] bg-secundary rounded-2xl'>
+        <h2 className='text-center text-2xl font-semibold text-green py-5'>
+          Libros recomendados
+        </h2>
+        <div className='flex flex-col gap-y-5 h-[600px] overflow-y-scroll px-10 pb-5 md:h-3/4'>
           {books.map((book) => (
             <CardBook
               key={book.id}
