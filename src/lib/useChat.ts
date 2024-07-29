@@ -28,10 +28,10 @@ export const useChat = (inputRef: RefObject<HTMLInputElement>) => {
     return () => window.removeEventListener('keydown', keyDown)
   }, [])
 
-  const [messages, submit, isPending] = useActionState<
-    Array<Message>,
-    string | Blob
-  >(async (prevMessages, data) => {
+  const action = async (
+    prevMessages: Message[],
+    data: string | Blob
+  ): Promise<Message[]> => {
     const formData = new FormData()
 
     if (typeof data === 'string') {
@@ -83,7 +83,12 @@ export const useChat = (inputRef: RefObject<HTMLInputElement>) => {
         latency
       }
     ]
-  }, [])
+  }
+
+  const [messages, submit, isPending] = useActionState<
+    Array<Message>,
+    string | Blob
+  >(action, [])
 
   function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault()
