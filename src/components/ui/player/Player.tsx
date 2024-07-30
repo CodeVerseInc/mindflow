@@ -12,7 +12,7 @@ import {
 
 import { ButtonPlayer } from './button-player/ButtonPlayer'
 import { formatTime } from '@/lib/formatTime'
-import { usePlayer } from '@/lib/usePlayer'
+import { usePlayer } from '@/components/ui/player/lib'
 import styles from './audioplayer.module.css'
 
 export interface Song {
