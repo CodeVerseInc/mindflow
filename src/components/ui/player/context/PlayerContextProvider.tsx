@@ -1,3 +1,5 @@
+'use client'
+
 import { PlayerContext } from './PlayerContext'
 
 interface Props {
