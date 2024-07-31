@@ -2,7 +2,7 @@ import { useTTS } from '@cartesia/cartesia-js/react'
 
 export const useCartesia = () => {
   const tts = useTTS({
-    apiKey: process.env.NEXT_PUBLIC_CARTERSIA_API_KEY || '',
+    apiKey: process.env.NEXT_PUBLIC_CARTESIA_API_KEY || '',
     sampleRate: 44100
   })
 
