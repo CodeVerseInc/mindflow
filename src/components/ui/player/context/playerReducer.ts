@@ -1,5 +1,5 @@
 type Action = {
-  type: 'SET_CURRENT_SONG_INDEX'
+  type: 'SET_CURRENT_SONG_INDEX' | 'SET_IS_PLAYING'
   payload?: any
 }
 
@@ -19,6 +19,12 @@ export const playerReducer = (
       return {
         ...state,
         currentSongIndex: action.payload
+      }
+
+    case 'SET_IS_PLAYING':
+      return {
+        ...state,
+        isPlaying: action.payload
       }
 
     default:

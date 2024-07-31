@@ -24,7 +24,10 @@ export const PlayerContextProvider: React.FC<Props> = ({ children }) => {
       payload: (state.currentSongIndex + 1) % songsLength
     })
 
-    //TODO: Set is playing to false
+    dispatch({
+      type: 'SET_IS_PLAYING',
+      payload: false
+    })
   }
 
   return (
