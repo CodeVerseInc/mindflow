@@ -18,7 +18,18 @@ const initialState: PlayerState = {
 export const PlayerContextProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(playerReducer, initialState)
 
+  const endedSong = (songsLength: number) => {
+    dispatch({
+      type: 'SET_CURRENT_SONG_INDEX',
+      payload: (state.currentSongIndex + 1) % songsLength
+    })
+
+    //TODO: Set is playing to false
+  }
+
   return (
-    <PlayerContext.Provider value={null}>{children}</PlayerContext.Provider>
+    <PlayerContext.Provider value={{ ...state, endedSong }}>
+      {children}
+    </PlayerContext.Provider>
   )
 }

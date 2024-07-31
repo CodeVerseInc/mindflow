@@ -1,5 +1,5 @@
 type Action = {
-  type: string
+  type: 'SET_CURRENT_SONG_INDEX'
   payload?: any
 }
 
@@ -15,8 +15,11 @@ export const playerReducer = (
   action: Action
 ): PlayerState => {
   switch (action.type) {
-    case '':
-      return state
+    case 'SET_CURRENT_SONG_INDEX':
+      return {
+        ...state,
+        currentSongIndex: action.payload
+      }
 
     default:
       return state
