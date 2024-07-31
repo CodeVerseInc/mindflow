@@ -1,5 +1,11 @@
+type ActionType =
+  | 'SET_CURRENT_SONG_INDEX'
+  | 'SET_IS_PLAYING'
+  | 'SET_CURRENT_TIME'
+  | 'SET_TOTAL_TIME'
+
 type Action = {
-  type: 'SET_CURRENT_SONG_INDEX' | 'SET_IS_PLAYING'
+  type: ActionType
   payload?: any
 }
 
@@ -25,6 +31,18 @@ export const playerReducer = (
       return {
         ...state,
         isPlaying: action.payload
+      }
+
+    case 'SET_CURRENT_TIME':
+      return {
+        ...state,
+        currentTime: action.payload
+      }
+
+    case 'SET_TOTAL_TIME':
+      return {
+        ...state,
+        totalTime: action.payload
       }
 
     default:
