@@ -1,5 +1,6 @@
 import { Song } from '@/components'
-import { useState, useRef, useEffect, RefObject } from 'react'
+import { useRef, useEffect, RefObject, useContext } from 'react'
+import { PlayerContext, PlayerContextValues } from '../context'
 
 interface Params {
   songs: Song[]
@@ -14,12 +15,19 @@ export const usePlayer = ({
   progressBarRef,
   songs
 }: Params) => {
-  const [currentSongIndex, setCurrentSongIndex] = useState(initialSongIndex)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [totalTime, setTotalTime] = useState(0)
+  const { state, dispatchers } = useContext(
+    PlayerContext
+  ) as PlayerContextValues
+
+  const { currentSongIndex, currentTime, isPlaying, totalTime } = state
+  const { setCurrentSongIndex, setCurrentTime, setIsPlaying, setTotalTime } =
+    dispatchers
 
   const animationRef = useRef<number>()
+
+  useEffect(() => {
+    setCurrentSongIndex(initialSongIndex)
+  }, [initialSongIndex])
 
   useEffect(() => {
     const audio = audioPlayerRef.current
@@ -37,7 +45,8 @@ export const usePlayer = ({
     }
 
     const endedSong = () => {
-      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length)
+      const newIndex = (currentSongIndex + 1) % songs.length
+      setCurrentSongIndex(newIndex)
       setIsPlaying(false)
     }
 

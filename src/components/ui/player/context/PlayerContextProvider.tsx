@@ -18,20 +18,45 @@ const initialState: PlayerState = {
 export const PlayerContextProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(playerReducer, initialState)
 
-  const endedSong = (songsLength: number) => {
+  const setCurrentTime = (time: number) => {
     dispatch({
-      type: 'SET_CURRENT_SONG_INDEX',
-      payload: (state.currentSongIndex + 1) % songsLength
+      type: 'SET_CURRENT_TIME',
+      payload: time
     })
+  }
 
+  const setTotalTime = (time: number) => {
+    dispatch({
+      type: 'SET_TOTAL_TIME',
+      payload: time
+    })
+  }
+
+  const setIsPlaying = (playing: boolean) => {
     dispatch({
       type: 'SET_IS_PLAYING',
-      payload: false
+      payload: playing
+    })
+  }
+
+  const setCurrentSongIndex = (index: number) => {
+    dispatch({
+      type: 'SET_CURRENT_SONG_INDEX',
+      payload: index
     })
   }
 
   return (
-    <PlayerContext.Provider value={{ ...state, endedSong }}>
+    <PlayerContext.Provider
+      value={{
+        state,
+        dispatchers: {
+          setCurrentTime,
+          setTotalTime,
+          setCurrentSongIndex,
+          setIsPlaying
+        }
+      }}>
       {children}
     </PlayerContext.Provider>
   )
