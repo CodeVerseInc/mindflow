@@ -2,9 +2,10 @@
 
 import { Message as MessageType, useChat } from 'ai/react'
 import { Message } from './message/Message'
-import { useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { IconSend2 } from '@tabler/icons-react'
 import { readText } from '@/lib/readText'
+import { PlayerContext, PlayerContextValues } from '../ui/player/context'
 
 const initialMessages: MessageType[] = [
   {
@@ -17,6 +18,9 @@ const initialMessages: MessageType[] = [
 
 export const Chat = () => {
   const messagesContainerRef = useRef<HTMLDivElement>(null)
+  const {
+    dispatchers: { setIsPlaying }
+  } = useContext(PlayerContext) as PlayerContextValues
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
     initialMessages,
@@ -31,6 +35,12 @@ export const Chat = () => {
     const { scrollHeight } = messagesContainerRef.current
 
     messagesContainerRef.current.scrollTop = scrollHeight
+  }, [messages])
+
+  useEffect(() => {
+    if (messages.length < 2) return
+
+    setIsPlaying(true)
   }, [messages])
 
   return (

@@ -63,18 +63,22 @@ export const usePlayer = ({
     }
   }, [currentSongIndex, songs])
 
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying)
+  useEffect(() => {
     const audio = audioPlayerRef.current
+
     if (audio) setTotalTime(audio.duration)
 
-    if (!isPlaying && audio) {
+    if (isPlaying && audio) {
       audio.play()
       animationRef.current = requestAnimationFrame(whilePlaying)
     } else {
       audio?.pause()
       cancelAnimationFrame(animationRef.current!)
     }
+  }, [isPlaying])
+
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying)
   }
 
   const whilePlaying = () => {
