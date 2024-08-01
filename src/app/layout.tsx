@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { primary, secundary } from '@/config/font'
+import { PlayerContextProvider } from '@/components/ui/player'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function RootLayout({
         className={`${
           (primary.variable, secundary.variable)
         } bg-primary text-white `}>
-        {children}
+        <PlayerContextProvider>{children}</PlayerContextProvider>
       </body>
     </html>
   )

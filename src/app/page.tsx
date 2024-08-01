@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <main className={`wrapper w-full p-5 h-screen`}>
+    <main className="wrapper">
       <Sidebar />
       <Chat />
     </main>

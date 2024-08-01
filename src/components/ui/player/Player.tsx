@@ -1,16 +1,21 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react'
+
 import Image from 'next/image'
+import { useRef } from 'react'
+
 import {
   IconPlayerPlay,
   IconPlayerPause,
   IconPlayerSkipBack,
   IconPlayerSkipForward
 } from '@tabler/icons-react'
+
 import { ButtonPlayer } from './button-player/ButtonPlayer'
+import { formatTime } from '@/lib/formatTime'
+import { usePlayer } from '@/components/ui/player/lib'
 import styles from './audioplayer.module.css'
 
-interface Song {
+export interface Song {
   url_song: string
   name: string
   image: string
@@ -22,102 +27,18 @@ interface PlayerProps {
 }
 
 export const Player: React.FC<PlayerProps> = ({ songs, initialSongIndex }) => {
-  const [currentSongIndex, setCurrentSongIndex] =
-    useState<number>(initialSongIndex)
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [currentTime, setCurrentTime] = useState(0)
-  const [totalTime, setTotalTime] = useState(0)
-
   const audioPlayer = useRef<HTMLAudioElement>(null)
   const progressBar = useRef<HTMLInputElement>(null)
-  const animationRef = useRef<number>()
 
-  useEffect(() => {
-    const audio = audioPlayer.current
+  const { handlers, state } = usePlayer({
+    songs,
+    initialSongIndex,
+    audioPlayerRef: audioPlayer,
+    progressBarRef: progressBar
+  })
 
-    const updateTime = () => {
-      if (audio) {
-        setCurrentTime(audio.currentTime)
-      }
-    }
-
-    const setDuration = () => {
-      if (audio) {
-        setTotalTime(audio.duration)
-      }
-    }
-
-    const endedSong = () => {
-      setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length)
-      setIsPlaying(false)
-    }
-
-    if (audio) {
-      audio.addEventListener('timeupdate', updateTime)
-      audio.addEventListener('loadedmetadata', setDuration)
-      audio.addEventListener('ended', endedSong)
-
-      return () => {
-        audio.removeEventListener('timeupdate', updateTime)
-        audio.removeEventListener('loadedmetadata', setDuration)
-        audio.removeEventListener('ended', endedSong)
-      }
-    }
-  }, [currentSongIndex, songs])
-
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying)
-    const audio = audioPlayer.current
-    if (audio) setTotalTime(audio.duration)
-
-    if (!isPlaying && audio) {
-      audio.play()
-      animationRef.current = requestAnimationFrame(whilePlaying)
-    } else {
-      audio?.pause()
-      cancelAnimationFrame(animationRef.current!)
-    }
-  }
-
-  const whilePlaying = () => {
-    const audio = audioPlayer.current
-
-    if (audio && progressBar.current) {
-      progressBar.current.value = audio.currentTime.toString()
-      animationRef.current = requestAnimationFrame(whilePlaying)
-    }
-  }
-
-  const changeRange = () => {
-    const audio = audioPlayer.current
-
-    if (audio && progressBar.current) {
-      audio.currentTime = parseFloat(progressBar.current.value)
-    }
-  }
-
-  const skipBackward = () => {
-    const newIndex =
-      currentSongIndex > 0 ? currentSongIndex - 1 : songs.length - 1
-    setCurrentSongIndex(newIndex)
-    setIsPlaying(false)
-  }
-
-  const skipForward = () => {
-    const newIndex = (currentSongIndex + 1) % songs.length
-    setCurrentSongIndex(newIndex)
-    setIsPlaying(false)
-  }
-
-  const formatTime = (time: number) => {
-    if (time == null) return `0:00`
-    const seconds = Math.floor(time % 60)
-    const minutes = Math.floor(time / 60)
-
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
-  }
-
-  const currentSong = songs[currentSongIndex]
+  const { totalTime, isPlaying, currentSong, currentTime } = state
+  const { skipBackward, skipForward, togglePlay, changeRange } = handlers
 
   return (
     <div className='[grid-area:player] bg-secundary flex flex-col items-center justify-center gap-y-3 rounded-2xl p-5'>
