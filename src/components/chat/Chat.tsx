@@ -1,11 +1,11 @@
 'use client'
 
-import { Message as MessageType, useChat } from 'ai/react'
-import { Message } from './message/Message'
-import { useContext, useEffect, useRef } from 'react'
-import { IconSend2 } from '@tabler/icons-react'
 import { readText } from '@/lib/readText'
+import { IconSend2 } from '@tabler/icons-react'
+import { Message as MessageType, useChat } from 'ai/react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { PlayerContext, PlayerContextValues } from '../ui/player/context'
+import { Message } from './message/Message'
 
 const initialMessages: MessageType[] = [
   {
@@ -18,6 +18,7 @@ const initialMessages: MessageType[] = [
 
 export const Chat = () => {
   const messagesContainerRef = useRef<HTMLDivElement>(null)
+  const [hasStartedPlaying, setHasStartedPlaying] = useState(false)
   const {
     dispatchers: { setIsPlaying }
   } = useContext(PlayerContext) as PlayerContextValues
@@ -38,10 +39,18 @@ export const Chat = () => {
   }, [messages])
 
   useEffect(() => {
-    if (messages.length < 2) return
+    if (messages.length < 2) {
+      if (hasStartedPlaying) {
+        setHasStartedPlaying(false) // Reinicia el estado si hay menos de 2 mensajes
+      }
+      return
+    }
 
-    setIsPlaying(true)
-  }, [messages])
+    if (!hasStartedPlaying) {
+      setIsPlaying(true)
+      setHasStartedPlaying(true) // Marca que ya se ha llamado
+    }
+  }, [messages, setIsPlaying, hasStartedPlaying])
 
   return (
     <section className='[grid-area:chat] flex flex-col gap-5 h-[calc(100vh-40px)] md:h-auto'>
